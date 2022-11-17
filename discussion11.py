@@ -9,7 +9,7 @@ def setUpDatabase(db_name):
     path = os.path.dirname(os.path.abspath(__file__))
     conn = sqlite3.connect(path+'/'+db_name)
     cur = conn.cursor()
-    return cur, conn
+    return cur, con
 
 
 # Creates list of species ID's and numbers
@@ -39,12 +39,17 @@ def create_species_table(cur, conn):
 # TASK 1
 # CREATE TABLE FOR PATIENTS IN DATABASE
 def create_patients_table(cur, conn):
-    pass
+    cur.execute("DROP TABLE IF EXISTS")
+    cur.execute('CREATE TABLE Patients (name TEXT)')
+    conn.commit()
+
 
 
 # ADD FLUFFLE TO THE TABLE
 def add_fluffle(cur, conn):
-    pass
+    cur.execute("INSERT INTO Patients (name)", 'Fluffle')
+    conn.commit()
+    
     
 
 # TASK 2
@@ -59,13 +64,16 @@ def add_pets_from_json(filename, cur, conn):
     json_data = json.loads(file_data)
 
     # THE REST IS UP TO YOU
-    pass
+    cur.execute('INSERT INTO Patients (name)', json_data)
+    conn.commit()
 
 
 # TASK 3
 # CODE TO OUTPUT NON-AGGRESSIVE PETS
 def non_aggressive_pets(aggressiveness, cur, conn):
-    pass
+    cur.execute('SELECT aggressiveness')
+    conn.commit()
+    
 
 
 
